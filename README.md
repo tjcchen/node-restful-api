@@ -11,4 +11,4 @@ a pure node restful api project
 - In the background, workers perform all the "checks" at the appropriate times, and send alerts to users when a check changes its state from "up" to "down", or vise versa.
 
 ## License
-MIT
+This repo is licensed under the terms of MIT.
