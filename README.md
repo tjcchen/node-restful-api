@@ -1,5 +1,9 @@
 ## node-restful-api
-a pure node restful api project
+a pure node restful api project.
+
+## Feature
+An "uptime monitor" allows users to enter URLs they want monitored, and receive
+alerts when those resources "go down" or "come back up".
 
 ## API Spec
 - The API listens on a PORT and accepts incoming HTTP reqeusts for POST, GET, PUT, DELETE, and HEAD.
