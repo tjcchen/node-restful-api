@@ -15,11 +15,14 @@ const server = http.createServer(function(req, res) {
   let path = parsedUrl.pathname;
   let trimmedPath = path.replace(/^\/+|\/+$/g, '');
 
-  // 3. Send the response
+  // 3. Get the HTTP Method
+  let method = req?.method?.toUpperCase();
+
+  // 4. Send the response
   res.end('Hello Nodejs Restful API!\n');
 
-  // 4. Log the request path
-  console.log('Request received on path:', trimmedPath);
+  // 5. Log the request path
+  console.log('Request received on path:', trimmedPath, '; with method', method);
 });
 
 // Start the server, and have it listen on port 3000
