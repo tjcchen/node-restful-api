@@ -21,12 +21,16 @@ const server = http.createServer(function(req, res) {
   // Get the HTTP Method
   let method = req?.method?.toUpperCase();
 
+  // Get the headers as an object
+  let headers = req.headers;
+
   // Send the response
   res.end('Hello Nodejs Restful API!\n');
 
   // Log the request path
-  console.log('Request received on path:', trimmedPath, '; with method', method);
-  console.log(JSON.stringify(queryStringObject, null, 4));
+  // console.log('Request received on path:', trimmedPath, '; with method', method);
+  // console.log(JSON.stringify(queryStringObject, null, 4));
+  console.log('Request received with these headers: ', headers);
 });
 
 // Start the server, and have it listen on port 3000
