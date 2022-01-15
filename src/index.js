@@ -7,6 +7,25 @@ const http = require('http');
 const url  = require('url');
 const { StringDecoder } = require('string_decoder');
 
+// Define the handlers
+let handlers = {};
+
+// Sample handler
+handlers.sample = (data, callback) => {
+    // callback a http status code, and a payload object
+    callback(406, {'name': 'sample handler'});
+};
+
+// Not found handler
+handlers.notFound = (data, callback) => {
+    callback(404);
+};
+
+// Define a request router
+let router = {
+    'sample': handlers.sample
+};
+
 // The server should respond to all requests with a string
 const server = http.createServer(function(req, res) {
     // Get the url and parse it
@@ -34,8 +53,37 @@ const server = http.createServer(function(req, res) {
     });
     req.on('end', () => {
         buffer += decoder.end();
-        res.end('Hello Nodejs Restful API!\n');
-        console.log('Request received with this payload: ', buffer);
+
+        // Choose the handler this request should go to. if one does not found, go to notFound handler
+        let choseHandler = typeof router[trimmedPath] !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+
+        // Construct the data object to send to the handler
+        let data = {
+            trimmedPath,
+            queryStringObject,
+            method,
+            headers,
+            payload: buffer
+        };
+
+        // Route the request to the handler specified in the router
+        choseHandler(data, function(statusCode, payload) {
+            // use the status code called back by the handler, or default to 200
+            statusCode = typeof statusCode === 'number' ? statusCode : 200;
+            // use the payload called back by the handler, or default to an object
+            payload = typeof payload === 'object' ? payload : {};
+
+            // convert the payload to a string
+            let payloadStr = JSON.stringify(payload);
+
+            // return the response
+            res.writeHead(statusCode);
+            res.end(payloadStr);
+            console.log('Returning this response: ', statusCode, payloadStr);
+        });
+
+       // res.end('Hello Nodejs Restful API!\n');
+       // console.log('Request received with this payload: ', buffer);
     });
 
     // Send the response
