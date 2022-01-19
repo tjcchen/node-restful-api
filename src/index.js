@@ -5,7 +5,9 @@
 // Dependencies
 const config = require('./config');
 const http = require('http');
+const https = require('https');
 const url  = require('url');
+const fs = require('fs');  // file system
 const { StringDecoder } = require('string_decoder');
 
 // Define the handlers
@@ -27,8 +29,33 @@ let router = {
     'sample': handlers.sample
 };
 
-// The server should respond to all requests with a string
-const server = http.createServer(function(req, res) {
+// Instantiate the HTTP server
+const httpServer = http.createServer(function(req, res) {
+    undefinedServer(req, res);
+});
+
+// Start the HTTP server
+httpServer.listen(config.httpPort, function() {
+    console.log(`The server is listening on port ${config.httpPort}`);
+});
+
+// Instantiate the HTTPS server with OpenSSL key and cert
+const httpsServerOptions = {
+    key: fs.readFileSync('./https/key.pem'),
+    cert: fs.readFileSync('./https/cert.pem'),
+};
+
+const httpsServer = https.createServer(httpsServerOptions, function(req, res) {
+    undefinedServer(req, res);
+});
+
+// Start the HTTPS server
+httpsServer.listen(config.httpsPort, function() {
+    console.log(`The server is listening on port ${config.httpsPort}`);
+});
+
+// All the server logic for both the http and https server
+let undefinedServer = (req, res) => {
     // Get the url and parse it
     let parsedUrl = url.parse(req.url, true);
 
@@ -83,21 +110,14 @@ const server = http.createServer(function(req, res) {
             res.end(payloadStr);
             console.log('Returning this response: ', statusCode, payloadStr);
         });
-
        // res.end('Hello Nodejs Restful API!\n');
        // console.log('Request received with this payload: ', buffer);
     });
 
     // Send the response
     // res.end('Hello Nodejs Restful API!\n');
-
     // Log the request path
     // console.log('Request received on path:', trimmedPath, '; with method', method);
     // console.log(JSON.stringify(queryStringObject, null, 4));
     // console.log('Request received with these headers: ', headers);
-});
-
-// Start the server, and have it listen on port 3000
-server.listen(config.port, function() {
-    console.log(`The server is listening on port ${config.port} in ${config.envName} mode`);
-});
+};
