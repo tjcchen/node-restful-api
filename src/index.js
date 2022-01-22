@@ -9,6 +9,13 @@ const https = require('https');
 const url  = require('url');
 const fs = require('fs');  // file system
 const { StringDecoder } = require('string_decoder');
+const dataHelper = require('../lib/data');
+
+// TESTING
+// @TODO delete this
+dataHelper.create('test', 'newFile', {name: 'Andy', occupation: 'Software Engineer'}, (err) => {
+    console.log('this was the error', err);
+});
 
 // Define the handlers
 let handlers = {};
