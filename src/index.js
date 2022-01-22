@@ -13,8 +13,12 @@ const dataHelper = require('../lib/data');
 
 // TESTING
 // @TODO delete this
-dataHelper.create('test', 'newFile', {name: 'Andy', occupation: 'Software Engineer'}, (err) => {
+// dataHelper.create('test', 'newFile', {name: 'Andy', occupation: 'Software Engineer'}, (err) => {
+//     console.log('this was the error', err);
+// });
+dataHelper.read('test', 'newFile', (err, data) => {
     console.log('this was the error', err);
+    console.log('this was the data', data); // {"name":"Andy","occupation":"Software Engineer"}
 });
 
 // Define the handlers
