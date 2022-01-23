@@ -20,7 +20,10 @@ const dataHelper = require('../lib/data');
 //     console.log('this was the error', err);
 //     console.log('this was the data', data); // {"name":"Andy","occupation":"Software Engineer"}
 // });
-dataHelper.update('test', 'newFile', {'name': 'andy'}, (err) => {
+// dataHelper.update('test', 'newFile', {'name': 'andy'}, (err) => {
+//     console.log('this was the error', err);
+// });
+dataHelper.delete('test', 'newFile', (err) => {
     console.log('this was the error', err);
 });
 
