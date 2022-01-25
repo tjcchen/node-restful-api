@@ -32,6 +32,7 @@ dataHelper.delete('test', 'newFile', (err) => {
 let router = {
     'sample': handlers.sample,
     'ping': handlers.ping,
+    'users': handlers.user
 };
 
 // Instantiate the HTTP server
