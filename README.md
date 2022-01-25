@@ -6,7 +6,7 @@ An "uptime monitor" allows users to enter URLs they want monitored, and receive
 alerts when those resources "go down" or "come back up".
 
 ## API Spec
-- The API listens on a PORT and accepts incoming HTTP reqeusts for POST, GET, PUT, DELETE, and HEAD.
+- The API listens on a PORT and accepts incoming HTTP requests for POST, GET, PUT, DELETE, and HEAD.
 - The API allows a client to connect, then create a new user, then edit and delete that user.
 - The API allows a user to "sign in" which gives them a token that they can use for subsequest authenticated requests.
 - The API allows the user to "sign out" which invalidates their token.
