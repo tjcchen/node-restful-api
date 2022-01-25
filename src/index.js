@@ -10,6 +10,7 @@ const url  = require('url');
 const fs = require('fs');  // file system
 const { StringDecoder } = require('string_decoder');
 const dataHelper = require('../lib/data');
+const handlers = require('../lib/handlers');
 
 // TESTING
 // @TODO delete this
@@ -26,25 +27,6 @@ const dataHelper = require('../lib/data');
 dataHelper.delete('test', 'newFile', (err) => {
     console.log('this was the error', err);
 });
-
-// Define the handlers
-let handlers = {};
-
-// Sample handler
-handlers.sample = (data, callback) => {
-    // callback a http status code, and a payload object
-    callback(406, {'name': 'sample handler'});
-};
-
-// Ping handler
-handlers.ping = (data, callback) => {
-    callback(200);
-};
-
-// Not found handler
-handlers.notFound = (data, callback) => {
-    callback(404);
-};
 
 // Define a request router
 let router = {
