@@ -3,7 +3,6 @@
  */
 
 // Dependencies
-const config = require('./config');
 const http = require('http');
 const https = require('https');
 const url  = require('url');
@@ -12,6 +11,7 @@ const { StringDecoder } = require('string_decoder');
 const dataHelper = require('../lib/data');
 const handlers = require('../lib/handlers');
 const helpers = require('../lib/helpers');
+const config = require('../lib/config');
 
 // TESTING
 // @TODO delete this
@@ -25,9 +25,9 @@ const helpers = require('../lib/helpers');
 // dataHelper.update('test', 'newFile', {'name': 'andy'}, (err) => {
 //     console.log('this was the error', err);
 // });
-dataHelper.delete('test', 'newFile', (err) => {
-    console.log('this was the error', err);
-});
+// dataHelper.delete('test', 'newFile', (err) => {
+//     console.log('this was the error', err);
+// });
 
 // Define a request router
 let router = {
