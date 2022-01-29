@@ -16,7 +16,9 @@ alerts when those resources "go down" or "come back up".
 
 ## Generate https pem with openssl
 ```bash
-openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+1、install openssl with brew
+
+2、openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
 ```
 
 ## License
