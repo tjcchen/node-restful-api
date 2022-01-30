@@ -33,7 +33,7 @@ const config = require('../lib/config');
 let router = {
     'sample': handlers.sample,
     'ping': handlers.ping,
-    'users': handlers.user
+    'users': handlers.users
 };
 
 // Instantiate the HTTP server
