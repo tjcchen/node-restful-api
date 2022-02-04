@@ -14,7 +14,7 @@ alerts when those resources "go down" or "come back up".
 - The API allows a signed-in user to edit or delete any of their checks.
 - In the background, workers perform all the "checks" at the appropriate times, and send alerts to users when a check changes its state from "up" to "down", and vise versa.
 
-## Generate https pem with openssl
+## Generate https .pem files with openssl
 ```bash
 1、install openssl with brew
 
