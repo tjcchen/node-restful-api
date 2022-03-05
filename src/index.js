@@ -13,6 +13,11 @@ const handlers = require('../lib/handlers');
 const helpers = require('../lib/helpers');
 const config = require('../lib/config');
 
+// @TODO Get rid of this
+helpers.sendTwilioSms('18518251024', 'Hello!', (err) => {
+    console.log('this was the error: ', err);
+});
+
 // TESTING
 // @TODO delete this
 // dataHelper.create('test', 'newFile', {name: 'Andy', occupation: 'Software Engineer'}, (err) => {
