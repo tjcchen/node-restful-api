@@ -2,7 +2,7 @@
 a pure node restful api project.
 
 ## Feature
-An "uptime monitor" allows users to enter URLs they want monitored, and receive
+An "uptime monitor" allows users to enter URLs they want to be monitored, and receive
 alerts when those resources "go down" or "come back up".
 
 ## API Spec
