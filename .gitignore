@@ -106,3 +106,4 @@ dist
 # misc
 .DS_Store
 .data
+.logs
