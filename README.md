@@ -27,5 +27,11 @@ Integrate Twilio services to this node project.
 website: https://www.twilio.com/
 ```
 
+## Debug mode
+Start the server in node debug http mode
+```bash
+NODE_DEBUG=http node src/index.js
+```
+
 ## License
 This repo is licensed under the terms of MIT.
