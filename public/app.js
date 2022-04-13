@@ -30,8 +30,8 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
     if (queryStringObject.hasOwnProperty(queryKey)) {
       count++;
 
-      // TODO start from this place
-
+      // If at least one query string parameter has already been added, prepend new ones with an ampersand
+      
     }
   }
 
