@@ -13,7 +13,13 @@ app.config = {
 // Ajax request (for the restful API)
 app.client = () => {};
 
-// Interface for making API calls
+/**
+ * Interface for making API calls
+ * 
+ * Example:
+ * app.client.request(undefined, '/ping', 'GET', undefined, undefined, (statusCode,payload) => {console.log(statusCode, payload)});
+ * 
+ */
 app.client.request = (headers, path, method, queryStringObject, payload, callback) => {
   // Set defaults
   headers = typeof headers === 'object' && headers != null ? headers : {};
