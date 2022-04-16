@@ -90,23 +90,23 @@ app.bindForms = function(){
     // Stop it from submitting
     e.preventDefault();
 
-    var formId = this.id;
-    var path = this.action;
-    var method = this.method.toUpperCase();
+    let formId = this.id;
+    let path = this.action;
+    let method = this.method.toUpperCase();
 
     // Hide the error message (if it's currently shown due to a previous error)
     // @ts-ignore
     document.querySelector("#"+formId+" .formError").style.display = 'hidden';
 
     // Turn the inputs into a payload
-    var payload = {};
+    let payload = {};
     // this.elements within form contains all the form elements
-    var elements = this.elements;
-    for(var i = 0; i < elements.length; i++){
+    let elements = this.elements;
+    for(let i = 0; i < elements.length; i++){
       // @ts-ignore
       if(elements[i].type !== 'submit'){
         // @ts-ignore
-        var valueOfElement = elements[i].type == 'checkbox' ? elements[i].checked : elements[i].value;
+        let valueOfElement = elements[i].type == 'checkbox' ? elements[i].checked : elements[i].value;
         // @ts-ignore
         // payload contains all the form information
         payload[elements[i].name] = valueOfElement;
@@ -118,7 +118,7 @@ app.bindForms = function(){
       // Display an error on the form if needed
       if(statusCode !== 200){
         // Try to get the error from the api, or set a default error message
-        var error = typeof(responsePayload.Error) == 'string' ? responsePayload.Error : 'An error has occured, please try again';
+        let error = typeof(responsePayload.Error) == 'string' ? responsePayload.Error : 'An error has occured, please try again';
 
         // Set the formError field with the error text
         document.querySelector("#"+formId+" .formError").innerHTML = error;
@@ -137,8 +137,9 @@ app.bindForms = function(){
 
 // Form response processor
 app.formResponseProcessor = function(formId,requestPayload,responsePayload){
-  var functionToCall = false;
+  let functionToCall = false;
   if(formId == 'accountCreate'){
+    // @TODO add formResponseProcessor logic here
     console.log('do something within formResponseProcessor');
   }
 };
