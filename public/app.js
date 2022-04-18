@@ -86,7 +86,7 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
 
 // Bind the forms
 app.bindForms = function(){
-  document.querySelector("form").addEventListener("submit", function(e) {
+  document.querySelector("form") && document.querySelector("form").addEventListener("submit", function(e) {
     // Stop it from submitting
     e.preventDefault();
 
