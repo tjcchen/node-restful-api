@@ -142,7 +142,7 @@ app.getSessionToken = function(){
     try{
       var token = JSON.parse(tokenString);
       app.config.sessionToken = token;
-      if(typeof(token) == 'object'){
+      if(typeof token == 'object'){
         app.setLoggedInClass(true);
       } else {
         app.setLoggedInClass(false);
