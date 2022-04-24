@@ -86,7 +86,10 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
 
 // Bind the forms
 app.bindForms = function(){
-  document.querySelector("form") && document.querySelector("form").addEventListener("submit", function(e) {
+  if (!document.querySelector("form")) {
+    return;
+  }
+  document.querySelector("form").addEventListener("submit", function(e) {
     // Stop it from submitting
     e.preventDefault();
 
@@ -118,7 +121,7 @@ app.bindForms = function(){
       // Display an error on the form if needed
       if(statusCode !== 200){
         // Try to get the error from the api, or set a default error message
-        let error = typeof(responsePayload.Error) == 'string' ? responsePayload.Error : 'An error has occured, please try again';
+        let error = typeof responsePayload.Error == 'string' ? responsePayload.Error : 'An error has occured, please try again';
 
         // Set the formError field with the error text
         document.querySelector("#"+formId+" .formError").innerHTML = error;
@@ -138,7 +141,7 @@ app.bindForms = function(){
 // Get the session token from localstorage and set it in the app.config object
 app.getSessionToken = function(){
   var tokenString = localStorage.getItem('token');
-  if(typeof(tokenString) == 'string'){
+  if(typeof tokenString == 'string'){
     try{
       var token = JSON.parse(tokenString);
       app.config.sessionToken = token;
@@ -169,7 +172,7 @@ app.setSessionToken = function(token){
   app.config.sessionToken = token;
   var tokenString = JSON.stringify(token);
   localStorage.setItem('token',tokenString);
-  if(typeof(token) == 'object'){
+  if(typeof token == 'object'){
     app.setLoggedInClass(true);
   } else {
     app.setLoggedInClass(false);
@@ -178,7 +181,7 @@ app.setSessionToken = function(token){
 
 // Renew the token
 app.renewToken = function(callback){
-  var currentToken = typeof(app.config.sessionToken) == 'object' ? app.config.sessionToken : false;
+  var currentToken = typeof app.config.sessionToken == 'object' ? app.config.sessionToken : false;
   if(currentToken){
     // Update the token with a new expiration
     var payload = {
