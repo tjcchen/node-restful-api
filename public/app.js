@@ -138,6 +138,35 @@ app.bindForms = function() {
   });
 };
 
+// Bind the logout button
+app.bindLogoutButton = function(){
+  document.getElementById("logoutButton").addEventListener("click", function(e) {
+    // Stop it from redirecting anywhere
+    e.preventDefault();
+
+    // Log the user out
+    app.logUserOut();
+  });
+};
+
+// Log the user out then redirect them
+app.logUserOut = function(){
+  // Get the current token id
+  var tokenId = typeof app.config.sessionToken.id == 'string' ? app.config.sessionToken.id : false;
+
+  // Send the current token to the tokens endpoint to delete it
+  var queryStringObject = {
+    'id': tokenId
+  };
+  app.client.request(undefined, 'api/tokens', 'DELETE', queryStringObject, undefined, function(statusCode, responsePayload) {
+    // Set the app.config token as false
+    app.setSessionToken(false);
+
+    // Send the user to the logged out page
+    window.location = '/session/deleted';
+  });
+};
+
 // Get the session token from localstorage and set it in the app.config object
 app.getSessionToken = function() {
   let tokenString = localStorage.getItem('token');
@@ -278,9 +307,11 @@ app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
 
 // Init (bootstrapping)
 app.init = function() {
-
   // Bind all form submissions
   app.bindForms();
+
+  // Bind logout logout button
+  app.bindLogoutButton();
 
   // Get the token from localstorage
   app.getSessionToken();
