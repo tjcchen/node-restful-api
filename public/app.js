@@ -186,16 +186,16 @@ app.renewToken = function(callback) {
     // Update the token with a new expiration
     let payload = {
       // @ts-ignore
-      'id' : currentToken.id,
-      'extend' : true,
+      'id': currentToken.id,
+      'extend': true,
     };
-    app.client.request(undefined,'api/tokens','PUT',undefined,payload,function(statusCode,responsePayload){
+    app.client.request(undefined, 'api/tokens', 'PUT', undefined, payload, function(statusCode, responsePayload) {
       // Display an error on the form if needed
       if(statusCode == 200){
         // Get the new token details
         // @ts-ignore
         let queryStringObject = {'id' : currentToken.id};
-        app.client.request(undefined,'api/tokens','GET',queryStringObject,undefined,function(statusCode,responsePayload){
+        app.client.request(undefined, 'api/tokens', 'GET ', queryStringObject, undefined, function(statusCode, responsePayload) {
           // Display an error on the form if needed
           if (statusCode == 200) {
             app.setSessionToken(responsePayload);
