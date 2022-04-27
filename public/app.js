@@ -308,6 +308,49 @@ app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
   }
 };
 
+// Load data on the page
+app.loadDataOnPage = function() {
+  // Get the current page from the body class
+  var bodyClasses = document.querySelector("body").classList;
+  var primaryClass = typeof bodyClasses[0] == 'string' ? bodyClasses[0] : false;
+
+  // Logic for account settings page
+  if(primaryClass == 'accountEdit'){
+    app.loadAccountEditPage();
+  }
+};
+
+// Load the account edit page specifically
+app.loadAccountEditPage = function() {
+  // Get the phone number from the current token, or log the user out if none is there
+  var phone = typeof app.config.sessionToken.phone == 'string' ? app.config.sessionToken.phone : false;
+  if (phone) {
+    // Fetch the user data
+    var queryStringObject = {
+      'phone': phone
+    };
+    app.client.request(undefined, 'api/users', 'GET', queryStringObject, undefined, function(statusCode, responsePayload) {
+      if (statusCode == 200) {
+        // Put the data into the forms as values where needed
+        document.querySelector("#accountEdit1 .firstNameInput").value = responsePayload.firstName;
+        document.querySelector("#accountEdit1 .lastNameInput").value = responsePayload.lastName;
+        document.querySelector("#accountEdit1 .displayPhoneInput").value = responsePayload.phone;
+
+        // Put the hidden phone field into both forms
+        var hiddenPhoneInputs = document.querySelectorAll("input.hiddenPhoneNumberInput");
+        for (var i = 0; i < hiddenPhoneInputs.length; i++) {
+            hiddenPhoneInputs[i].value = responsePayload.phone;
+        }
+      } else {
+        // If the request comes back as something other than 200, log the user our (on the assumption that the api is temporarily down or the users token is bad)
+        app.logUserOut();
+      }
+    });
+  } else {
+    app.logUserOut();
+  }
+};
+
 // Init (bootstrapping)
 app.init = function() {
   // Bind all form submissions
@@ -321,6 +364,9 @@ app.init = function() {
 
   // Renew token
   app.tokenRenewalLoop();
+
+  // Load data on page
+  app.loadDataOnPage();
 };
 
 // Call the init processes after the window loads
