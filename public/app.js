@@ -86,10 +86,10 @@ app.client.request = (headers, path, method, queryStringObject, payload, callbac
 
 // Bind the forms
 app.bindForms = function() {
-  if (!document.querySelector("form")) {
+  if (!document.querySelector('form')) {
     return;
   }
-  document.querySelector("form").addEventListener("submit", function(e) {
+  document.querySelector('form').addEventListener('submit', function(e) {
     // Stop it from submitting
     e.preventDefault();
 
@@ -99,7 +99,7 @@ app.bindForms = function() {
 
     // Hide the error message (if it's currently shown due to a previous error)
     // @ts-ignore
-    document.querySelector("#"+formId+" .formError").style.display = 'hidden';
+    document.querySelector('#'+formId+' .formError').style.display = 'hidden';
 
     // Turn the inputs into a payload
     let payload = {};
@@ -124,11 +124,11 @@ app.bindForms = function() {
         let error = typeof responsePayload.Error == 'string' ? responsePayload.Error : 'An error has occured, please try again';
 
         // Set the formError field with the error text
-        document.querySelector("#"+formId+" .formError").innerHTML = error;
+        document.querySelector('#'+formId+' .formError').innerHTML = error;
 
         // Show (unhide) the form error field on the form
         // @ts-ignore
-        document.querySelector("#"+formId+" .formError").style.display = 'block';
+        document.querySelector('#'+formId+' .formError').style.display = 'block';
 
       } else {
         // If successful, send to form response processor
@@ -140,7 +140,7 @@ app.bindForms = function() {
 
 // Bind the logout button
 app.bindLogoutButton = function(){
-  document.getElementById("logoutButton").addEventListener("click", function(e) {
+  document.getElementById('logoutButton').addEventListener('click', function(e) {
     // Stop it from redirecting anywhere
     e.preventDefault();
 
@@ -191,7 +191,7 @@ app.getSessionToken = function() {
 
 // Set (or remove) the loggedIn class from the body
 app.setLoggedInClass = function(add) {
-  let target = document.querySelector("body");
+  let target = document.querySelector('body');
   if(add){
     target.classList.add('loggedIn');
   } else {
@@ -253,7 +253,7 @@ app.tokenRenewalLoop = function() {
   setInterval(function() {
     app.renewToken(function(err) {
       if (!err) {
-        console.log("Token renewed successfully @ " + Date.now());
+        console.log('Token renewed successfully @ ' + Date.now());
       }
     });
   }, 1000 * 60);
@@ -264,7 +264,7 @@ app.tokenRenewalLoop = function() {
   setInterval(function() {
     app.renewToken(function(err) {
       if (!err) {
-        console.log("Token renewed successfully @ " + Date.now());
+        console.log('Token renewed successfully @ ' + Date.now());
       }
     });
   }, 1000 * 60);
@@ -286,11 +286,11 @@ app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
       if (newStatusCode !== 200) {
 
         // Set the formError field with the error text
-        document.querySelector("#"+formId+" .formError").innerHTML = 'Sorry, an error has occured. Please try again.';
+        document.querySelector('#'+formId+' .formError').innerHTML = 'Sorry, an error has occured. Please try again.';
 
         // Show (unhide) the form error field on the form
         // @ts-ignore
-        document.querySelector("#"+formId+" .formError").style.display = 'block';
+        document.querySelector('#'+formId+' .formError').style.display = 'block';
 
       } else {
         // If successful, set the token and redirect the user
@@ -311,7 +311,7 @@ app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
 // Load data on the page
 app.loadDataOnPage = function() {
   // Get the current page from the body class
-  let bodyClasses = document.querySelector("body").classList;
+  let bodyClasses = document.querySelector('body').classList;
   let primaryClass = typeof bodyClasses[0] == 'string' ? bodyClasses[0] : false;
 
   // Logic for account settings page
@@ -332,12 +332,12 @@ app.loadAccountEditPage = function() {
     app.client.request(undefined, 'api/users', 'GET', queryStringObject, undefined, function(statusCode, responsePayload) {
       if (statusCode == 200) {
         // Put the data into the forms as values where needed
-        document.querySelector("#accountEdit1 .firstNameInput").value = responsePayload.firstName;
-        document.querySelector("#accountEdit1 .lastNameInput").value = responsePayload.lastName;
-        document.querySelector("#accountEdit1 .displayPhoneInput").value = responsePayload.phone;
+        document.querySelector('#accountEdit1 .firstNameInput').value = responsePayload.firstName;
+        document.querySelector('#accountEdit1 .lastNameInput').value = responsePayload.lastName;
+        document.querySelector('#accountEdit1 .displayPhoneInput').value = responsePayload.phone;
 
         // Put the hidden phone field into both forms
-        let hiddenPhoneInputs = document.querySelectorAll("input.hiddenPhoneNumberInput");
+        let hiddenPhoneInputs = document.querySelectorAll('input.hiddenPhoneNumberInput');
         for (let i = 0; i < hiddenPhoneInputs.length; i++) {
             hiddenPhoneInputs[i].value = responsePayload.phone;
         }
