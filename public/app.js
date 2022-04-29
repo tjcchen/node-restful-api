@@ -306,6 +306,18 @@ app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
     // @ts-ignore
     window.location = '/checks/all';
   }
+
+  // If forms saved successfully and they have success messages, show them
+  var formsWithSuccessMessages = ['accountEdit1', 'accountEdit2'];
+  if (formsWithSuccessMessages.indexOf(formId) > -1) {
+    document.querySelector('#'+formId+' .formSuccess').style.display = 'block';
+  }
+
+  // If the user just deleted their account, redirect them to the account-delete page
+  if (formId == 'accountEdit3') {
+    app.logUserOut(false);
+    window.location = '/account/deleted';
+  }
 };
 
 // Load data on the page
