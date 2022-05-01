@@ -318,6 +318,11 @@ app.formResponseProcessor = function(formId, requestPayload, responsePayload) {
     app.logUserOut(false);
     window.location = '/account/deleted';
   }
+
+  // If the user just created a new check successfully, redirect back to the dashboard
+  if (formId == 'checksCreate') {
+    window.location = '/checks/all';
+  }
 };
 
 // Load data on the page
