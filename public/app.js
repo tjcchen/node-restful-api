@@ -336,12 +336,18 @@ app.loadDataOnPage = function() {
 app.loadAccountEditPage = function() {
   // Get the phone number from the current token, or log the user out if none is there
   let phone = typeof app.config.sessionToken.phone == 'string' ? app.config.sessionToken.phone : false;
+
+  console.log('debug mode');
+  console.log(phone);
+
   if (phone) {
     // Fetch the user data
     let queryStringObject = {
       'phone': phone
     };
-    app.client.request(undefined, 'api/users', 'GET', queryStringObject, undefined, function(statusCode, responsePayload) {
+    app.client.request(undefined, '/api/users', 'GET', queryStringObject, undefined, function(statusCode, responsePayload) {
+      console.log(statusCode, responsePayload);
+  
       if (statusCode == 200) {
         // Put the data into the forms as values where needed
         document.querySelector('#accountEdit1 .firstNameInput').value = responsePayload.firstName;
