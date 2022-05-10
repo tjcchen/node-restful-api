@@ -31,6 +31,7 @@ website: https://www.twilio.com/
 Start the server in node debug http mode
 ```bash
 NODE_DEBUG=http node src/index.js
+NODE_DEBUG=server node src/index.js
 ```
 
 ## License
