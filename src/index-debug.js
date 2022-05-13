@@ -13,6 +13,7 @@ const app = {};
 
 // Init function
 // cmd: node inspect src/index-debug.js
+// cmd: cont, repl
 app.init = () => {
     // Start the server
     debugger;
