@@ -27,3 +27,21 @@ _app.tests.unit['helpers.getANumber should return 1'] = (done) => {
     done();
 };
 
+// Assert that the getNumber function is returning a 2
+_app.tests.unit['helpers.getANumber should return 2'] = (done) => {
+    let val = helpers.getANumber();
+    assert.equal(val, 2);
+    done();
+};
+
+// Run all the tests, collecting the errors and successes
+_app.runTests = () => {
+    let error = [];
+    let successes = 0;
+    let limit = _app.countTests();
+
+    // TODO: start from this place
+};
+
+// Run the tests
+_app.runTests();
