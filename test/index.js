@@ -81,7 +81,7 @@ _app.produceTestReport = (limit, successes, errors) => {
 
 // Run all the tests, collecting the errors and successes
 _app.runTests = () => {
-    let error = [];
+    let errors = [];
     let successes = 0;
     let limit = _app.countTests();
     let counter = 0;
