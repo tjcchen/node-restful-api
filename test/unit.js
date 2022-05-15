@@ -41,5 +41,24 @@ unit['logs.list should callback a false error and an array of log names'] = (don
     });
 };
 
+// Logs.truncate should not throw if the logId doesn't exist
+unit['logs.truncate should not throw if the logId does not exist. It should callback an error instead'] = (done) => {
+    assert.doesNotThrow(() => {
+        // Gives a wrong logId
+        logs.truncate('I do not exist', (err) => {
+            assert.ok(err);
+            done();
+        });
+    }, TypeError);
+};
+
+// exampleDebuggingProblem.init should not throw( but it does )
+unit['exampleDebuggingProblem.init should not throw when called'] = (done) => {
+    assert.doesNotThrow(() => {
+        exampleDebuggingProblem.init();
+        done();
+    }, TypeError);
+};
+
 // Export the tests to the runner
 module.exports = unit;
