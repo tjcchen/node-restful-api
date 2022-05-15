@@ -4,6 +4,7 @@
 
 const helpers = require('../lib/helpers');
 const assert = require('assert');
+const { count } = require('console');
 
 // Application logic for the test runner
 const _app = {};
@@ -39,8 +40,45 @@ _app.runTests = () => {
     let error = [];
     let successes = 0;
     let limit = _app.countTests();
+    let counter = 0;
 
-    // TODO: start from this place
+    // loop through all the tests
+    for (let key in _app.tests) {
+        if (_app.tests.hasOwnProperty(key)) {
+            let subTests = _app.tests[key];
+            for (let testName in subTests) {
+                if (subTests.hasOwnProperty(testName)) {
+                    (function() {
+                        let tmpTestName = testName;
+                        let testValue = subTests[testName];
+
+                        // Call the test
+                        try {
+                            testValue(() => {
+                                // If it calls back without throwing, then it succeeded, so log it in green
+                                console.log('\x1b[32m%s\x1b[0m', tmpTestName);
+                                counter++;
+                                successes++;
+                                if (counter === limit) {
+                                    _app.produceTestReport(limit, successes, errors);
+                                }
+                            });
+                        } catch(ex) {
+                            // if it throws, then it failed, so capture the error thrown and log it in red
+                            errors.push({
+                                'name': testName,
+                                'error': ex
+                            });
+                            counter++;
+                            if (counter === limit) {
+                                _app.produceTestReport(limit, successes, errors);
+                            }
+                        }
+                    })();
+                }
+            }
+        }
+    }
 };
 
 // Run the tests
