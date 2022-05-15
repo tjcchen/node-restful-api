@@ -31,5 +31,15 @@ unit['helpers.getANumber should return 2'] = (done) => {
     done();
 };
 
+// Logs.list should callback an array and a false error
+unit['logs.list should callback a false error and an array of log names'] = (done) => {
+    logs.list(true, (err, logFileNames) => {
+        assert.equal(err, false);
+        assert.ok(logFileNames instanceof Array);
+        assert.ok(logFileNames.length > 1);
+        done();
+    });
+};
+
 // Export the tests to the runner
 module.exports = unit;
