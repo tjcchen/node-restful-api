@@ -17,7 +17,7 @@ const helpers = {};
 helpers.makeGetRequest = (path, callback) => {
     // Configure the request details
     let requestDetails = {
-        'protocol': 'http',
+        'protocol': 'http:',
         'hostname': 'localhost',
         'port': config.httpPort,
         'method': 'GET',
@@ -59,6 +59,13 @@ api['/api/users should respond to GET with 400'] = (done) => {
     });
 };
 
+// Make a request to a random path
+api['A random path should respond to GET with 404'] = (done) => {
+    helpers.makeGetRequest('/this/path/shoudnt/exist', (res) => {
+        assert.equal(res.statusCode, 404);
+        done();
+    });
+};
 
 // Export the tests to the runner
 module.exports = api;
