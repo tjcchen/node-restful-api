@@ -16,10 +16,22 @@ const helpers = {};
 
 helpers.makeGetRequest = (path, callback) => {
     // Configure the request details
-
+    let requestDetails = {
+        'protocol': 'http',
+        'hostname': 'localhost',
+        'port': config.httpPort,
+        'method': 'GET',
+        'path': path,
+        'headers': {
+            'Content-type': 'application/json'
+        }
+    };
 
     // Send the request
-    
+    let req = http.request(requestDetails, (res) => {
+        callback(res);
+    });
+    req.end();
 };
 
 
