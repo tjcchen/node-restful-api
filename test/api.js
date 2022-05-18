@@ -3,7 +3,7 @@
  */
 
 // Dependencies
-const app = require('./index');
+const app = require('../src/index');
 const assert = require('assert');
 const http = require('http');
 const config = require('../lib/config');
@@ -34,6 +34,14 @@ helpers.makeGetRequest = (path, callback) => {
     req.end();
 };
 
+// The main init() function should run without throwing
+api['app.init should start without throwing'] = (done) => {
+    assert.doesNotThrow(() => {
+        app.init((err) => {
+            done();
+        });
+    }, TypeError);
+};
 
 // Export the tests to the runner
 module.exports = api;

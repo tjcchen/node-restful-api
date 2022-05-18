@@ -11,7 +11,7 @@ const cli = require('../lib/cli');
 const app = {};
 
 // Init function
-app.init = () => {
+app.init = (callback) => {
     // Start the server
     server.init();
 
@@ -21,11 +21,15 @@ app.init = () => {
     // Start the CLI, but make sure it starts last
     setTimeout(() => {
         cli.init();
+        callback();
     }, 50);
 };
 
-// Execute
-app.init();
+// Self invoking only if required directly
+// NB: please note this trick
+if (require.main === module) {
+    app.init(() => {});
+}
 
 // Export the app
 module.exports = app;
