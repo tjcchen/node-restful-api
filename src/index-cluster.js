@@ -16,6 +16,10 @@ const os = require('os');
 const app = {};
 
 // Init function
+// Cmd to check cpu number:
+// 1. sysctl -n hw.ncpu       8
+// 2. sysctl hw.physicalcpu   4
+// 3. sysctl hw.logicalcpu    8
 app.init = (callback) => {
     // If we'are on the master thread, start the background workers and the CLI
     if (cluster.isMaster) {
@@ -27,6 +31,11 @@ app.init = (callback) => {
             cli.init();
             callback();
         }, 50);
+
+        // [IMPORTANT] Fork the process
+        for (let i = 0; i < os.cpus().length; i++) {
+            cluster.fork();
+        }
     } else {
         // If we are not on the master thread, start the HTTP server
         server.init();
