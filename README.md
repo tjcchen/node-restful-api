@@ -35,7 +35,10 @@ NODE_DEBUG=server node src/index.js
 ```
 
 ## Node documentation  
-link: https://nodejs.org/docs/latest-v8.x/api/cluster.html  
+Link: https://nodejs.org/docs/latest-v8.x/api/cluster.html  
+
+## Contact
+Email: tjcchen.engineer@gmail.com
 
 ## License
 This repo is licensed under the terms of MIT.
