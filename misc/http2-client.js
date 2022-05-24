@@ -1,3 +1,3 @@
-// Http2 client side
-//
-// 
+/**
+ * Example HTTP2 Client
+ */
