@@ -3,6 +3,8 @@
  * 
  * Listens to port 6000 and sends the word "pong" to client
  * 
+ * TCP establishes a two-way connection between a server and a single client
+ * 
  */
 
 // Dependencies
