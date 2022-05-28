@@ -3,6 +3,8 @@
  * 
  * Sending a message to a UDP server on port 6000
  * 
+ * UDP provides two-way message transfer between a server and a large number of clients. 
+ * 
  */
 
 // Dependencies
