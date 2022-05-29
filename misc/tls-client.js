@@ -3,6 +3,9 @@
  * 
  * Connects to port 6000 and sends the word "ping" to server
  * 
+ * The tls module provides an implementation of the Transport Layer Security (TLS) and
+ * Secure Socket Layer (SSL) protocols that is built on top of OpenSSL
+ * 
  */
 
 // Dependencies
