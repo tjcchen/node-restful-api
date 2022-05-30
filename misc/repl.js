@@ -3,6 +3,8 @@
  * 
  * Take in the word "fizz" and log out "buzz"
  * 
+ * REPL module can be used as a replacement of readline module for writing a CLI
+ * 
  */
 
 // Dependencies
