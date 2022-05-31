@@ -3,6 +3,8 @@
  * 
  * The async_hooks module provides an API to track asynchronous resources. 
  * 
+ * Most browsers' `console.log` are asynchronous in some manner
+ * 
  */
 
 // Dependencies
